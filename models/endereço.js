@@ -1,4 +1,4 @@
-const{ Model, DataTypes} = require ('sequilize');
+const{ Model, DataTypes} = require ('sequelize');
 
 class Endereco extends Model {}
 
