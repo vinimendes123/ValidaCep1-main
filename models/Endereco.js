@@ -1,4 +1,6 @@
-const{ Model, DataTypes} = require ('sequelize');
+const { Sequelize } = require ('../models/Endereco');
+const{ Model, DataTypes} = require('sequelize');
+const sequelize = require('../config/database')
 
 class Endereco extends Model {}
 
@@ -47,4 +49,4 @@ Endereco.init({
     timestamps: true,
 });
 
-module.exports = Endereco;
+module.exports = Endereco ;

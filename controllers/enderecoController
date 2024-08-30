@@ -1,6 +1,4 @@
-
-const { Endereco } = require('../models');
-
+const { Endereco } = require('../models/Endereco');
 
 exports.createEndereco = async (req, res) => {
     try {
@@ -110,4 +108,34 @@ exports.deleteEndereco = async (req, res) => {
     }
 };
 
+const axios = require('axios');
 
+exports.createEnderecoByCep = async (req, res) => {
+    try {
+        const { cep } = req.params;
+        const cleanedCep = cep.replace(/\D/g, '');
+        const response = await axios.get(`https://viacep.com.br/ws/${cleanedCep}/json/`);
+
+        if (response.data.erro) {
+            return res.status(404).json({ error: 'CEP não encontrado' });
+        }
+
+        const { logradouro, complemento, bairro, localidade, uf, ibge } = response.data;
+        const { numero } = req.body;
+
+        const novoEndereco = await Endereco.create({
+            Cep: cleanedCep,
+            Logradouro: logradouro,
+            Numero: numero,
+            Complemento: complemento || '',
+            Bairro: bairro,
+            Cidade: localidade,
+            Estado: uf,
+            MunicipioIBGE: ibge
+        });
+
+        res.status(201).json(novoEndereco);
+    } catch (error) {
+        res.status(500).json({ error: 'Erro ao criar endereço', details: error.message });
+    }
+};
