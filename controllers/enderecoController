@@ -1,5 +1,7 @@
 const { Endereco } = require('../models/Endereco');
 
+
+
 exports.createEndereco = async (req, res) => {
     try {
         const { Cep, Logradouro, Numero, Complemento, Bairro, Cidade, Estado, MunicipioIBGE } = req.body;
@@ -36,8 +38,9 @@ exports.getAllEnderecos = async (req, res) => {
 
 exports.getEnderecoById = async (req, res) => {
     try {
-        const { Id } = req.params;
-        const endereco = await Endereco.findByPk(Id);
+        const { id } = req.params;
+        console.log(id)
+        const endereco = await Endereco.findByPk(id);
 
 
         if (!endereco) {

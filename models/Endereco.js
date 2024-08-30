@@ -1,5 +1,4 @@
-const { Sequelize } = require ('../models/Endereco');
-const{ Model, DataTypes} = require('sequelize');
+const{ Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/database')
 
 class Endereco extends Model {}
@@ -9,44 +8,53 @@ Endereco.init({
         type:DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
+        field: 'Id',
     },
     Cep: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        field: 'Cep',
     },
     Logradouro: {
         type: DataTypes.STRING,
         allowNull: false,
+        field: 'Logradouro',
 
     },
     Numero: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        field: 'Numero',
     },
     Complemento: {
         type: DataTypes.STRING,
+        field: 'Complemento',
     },
     Bairro: {
         type: DataTypes.STRING,
         allowNull: false,
+        field: 'Bairro',
     },
     Cidade: {
         type: DataTypes.STRING,
         allowNull: false,
+        field: 'Cidade',
     },
     Estado: {
         type: DataTypes.STRING,
         allowNull: false,
+        field: 'Estado',
     },
     MunicipioIBGE: {
         type: DataTypes.STRING,
         allowNull: false,
+        field: 'MunicipioIBGE',
     },
 }, {
     sequelize,
     modelName: 'Endereco',
-    tableName: 'enderecos',
-    timestamps: true,
+    tableName: 'endereços',
+    timestamps: false,
 });
 
-module.exports = Endereco ;
+module.exports = { Endereco };
